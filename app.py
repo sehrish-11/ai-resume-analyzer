@@ -1,5 +1,5 @@
 import streamlit as st
-import pdfminer.high_level as pdfminer
+from pdfminer.high_level import extract_text
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 
@@ -9,7 +9,7 @@ st.title("AI Resume Analyzer 📝")
 # Function to extract text from PDF
 def extract_pdf_text(uploaded_file):
     try:
-        text = pdfminer.extract_text(uploaded_file)
+        text = extract_text(uploaded_file)  # FIXED: directly use extract_text
         return text
     except Exception as e:
         st.error(f"Error extracting text: {e}")
